@@ -17,8 +17,10 @@ const App = () => {
     getItems();
   }, []);
 
-  async function getItems(page) {
-    let result = await Util.getItems(page);
+  async function getItems(page = 1) {
+    let result = await Util.getItemsQuery(page);
+
+    console.log(' caiu aqui')
 
     setTotal(result.data.total);
     setImoveis([...imoveis, ...result.data.buildings]);
@@ -41,9 +43,9 @@ const App = () => {
 
   return (
     <>
-      <Header></Header>
+      {/* <Header></Header> */}
       <Styled.Container>
-        <Filter setPages={setPages} total={total} imoveis={imoveis} _onChange={_onChange}></Filter>
+        <Filter page={pages} setPages={setPages} total={total} imoveis={imoveis} _onChange={_onChange}></Filter>
         <ImoveisContent pages={pages} nextPage={nextPage} total={total} imoveis={imoveis}></ImoveisContent>
       </Styled.Container>
     </>

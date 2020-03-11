@@ -26,31 +26,8 @@ class Util {
     return text + "...";
   }
 
-  getItems(page = 1, state = "", city = "", min = "", max = "", price_order = "") {
-
-    let query = "?results_per_page=5"
-
-    if (page)
-      query += `&page=${page}`;
-
-    if (state)
-      query += `&state=${state}`;
-
-    if (city)
-      query += `&city=${city}`;
-
-    if (min)
-      query += `&min_price=${min}`;
-
-    if (max)
-      query += `&max_price=${max}`;
-    
-    if (price_order) 
-      query += `&price_order=${price_order}`
-
-    console.log(query);
-
-    let items = Axios.get(`https://www.orulo.com.br/api/v2/buildings${query}`, this.config, this.bodyParameters);
+  getItemsQuery(page) {
+    let items = Axios.get(`https://www.orulo.com.br/api/v2/buildings?results_per_page=5&page=${page}`, this.config, this.bodyParameters);
 
     return items;
   }
